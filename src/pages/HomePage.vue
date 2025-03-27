@@ -110,8 +110,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 100dvh;
-        padding-top: var(--navigation-bar-height);
+        min-height: calc(100dvh - var(--navigation-bar-height));
         text-align: center;
 
         .btn

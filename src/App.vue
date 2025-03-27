@@ -1,17 +1,37 @@
 <script lang="ts" setup>
-    import AlertHandler from "./components/handlers/AlertHandler.vue";
-    import DefaultLayout from "./layouts/DefaultLayout.vue";
+    import { ref } from "vue";
+
+    // import AlertHandler from "./components/handlers/AlertHandler.vue";
+    // import DefaultLayout from "./layouts/DefaultLayout.vue";
+
+    const drawer = ref<boolean>(false);
+    const toggleDrawer = () => { drawer.value = !(drawer.value); };
 </script>
 
 <template>
-    <DefaultLayout>
-        <RouterView v-slot="context">
-            <Transition name="page" mode="out-in">
-                <Component :is="context.Component" :key="context.route.path" />
-            </Transition>
-        </RouterView>
-    </DefaultLayout>
-    <AlertHandler />
+    <VApp>
+        <VNavigationDrawer v-model="drawer">
+            <VList>
+                <VListItem>
+                    <VListItem link title="Order" />
+                </VListItem>
+                <VListItem>
+                    <VListItem link title="Products" />
+                </VListItem>
+            </VList>
+        </VNavigationDrawer>
+        <VAppBar color="primary" @click="toggleDrawer">
+            <template #prepend>
+                <VAppBarNavIcon />
+            </template>
+            <template #default>
+                <VAppBarTitle>Backoffice App</VAppBarTitle>
+            </template>
+        </VAppBar>
+        <VMain>
+            <RouterView />
+        </VMain>
+    </VApp>
 </template>
 
 <style lang="scss">
@@ -19,20 +39,9 @@
 
     #app
     {
-        .page-enter-from,
-        .page-leave-to
+        .v-main
         {
-            opacity: 0;
-        }
-        .page-enter-active,
-        .page-leave-active
-        {
-            transition: opacity $app-transition-duration $app-transition-timing-function;
-        }
-        .page-enter-to,
-        .page-leave-from
-        {
-            opacity: 1;
+            background-color: $app-slightly-off-white;
         }
     }
 </style>
