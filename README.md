@@ -1,6 +1,8 @@
-# Byloth's Tuemplate
+# Backoffice App
 
-A Vue.js 3 template app based on Vite with TypeScript, Pinia, Vue Router and more.
+## Frontend
+
+A generic frontend for a backoffice app to manage some orders and products.
 
 ## Customize configuration
 

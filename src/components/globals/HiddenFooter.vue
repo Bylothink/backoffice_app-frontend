@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-    import FontAwesome from "@/components/ui/FontAwesome.vue";
-
     const currentYear = new Date().getFullYear();
 </script>
 
 <template>
     <footer class="hidden-footer">
         <p>
-            Made with <FontAwesome icon="heart"
-                                   alt="Lots of love!"
-                                   title="Lots of love!" /> by
+            Made with <VIcon icon="mdi-heart"
+                             size="small"
+                             title="Lots of love!" /> by
             <a class="link bold"
                href="https://www.byloth.dev/"
                target="_blank"
                title="Byloth's Website">Byloth</a>.
         </p>
         <p>
-            <small>Copywrong ©️ 2024 - {{ currentYear }} “<b>Tuemplate</b>”. All the wrongs reserved.</small>
+            <small>Copywrong ©️ {{ currentYear }} “<b>Backoffice App</b>”. All the wrongs reserved.</small>
         </p>
     </footer>
 </template>
@@ -60,11 +58,12 @@
             }
         }
 
-        .fa-heart
+        .v-icon
         {
             animation: pulse 2s infinite;
             color: red;
             cursor: help;
+            vertical-align: text-bottom;
         }
 
         .link

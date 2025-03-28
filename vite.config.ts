@@ -5,7 +5,6 @@ import Vue from "@vitejs/plugin-vue";
 import Vuetify from "vite-plugin-vuetify";
 
 export default defineConfig({
-  base: "/tuemplate/",
   plugins: [
     Vue(),
     Vuetify({ autoImport: true })

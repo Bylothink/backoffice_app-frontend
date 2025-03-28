@@ -1,83 +1,5 @@
 <script lang="ts" setup>
-    import { useVuert } from "@byloth/vuert";
-
-    import AppButton from "@/components/ui/AppButton.vue";
     import VueLogo from "@/components/VueLogo.vue";
-
-    const $vuert = useVuert();
-
-    const emitSuccess = () => $vuert.emit({
-        icon: "circle-check",
-        title: "Success",
-        message: "This is a success message.",
-        type: "success",
-        dismissible: true,
-        timeout: 5000,
-        actions: [
-            {
-                label: "Ok",
-                type: "primary"
-            },
-            {
-                label: "Cancel",
-                type: "secondary"
-            }
-        ]
-    });
-    const emitInfo = () => $vuert.emit({
-        icon: "circle-info",
-        title: "Info",
-        message: "This is an informative message.",
-        type: "info",
-        dismissible: true,
-        timeout: 5000,
-        actions: [
-            {
-                label: "Ok",
-                type: "primary"
-            },
-            {
-                label: "Cancel",
-                type: "secondary"
-            }
-        ]
-    });
-    const emitWarning = () => $vuert.emit({
-        icon: "circle-exclamation",
-        title: "Warning",
-        message: "This is a warning message.",
-        type: "warning",
-        dismissible: true,
-        timeout: 5000,
-        actions: [
-            {
-                label: "Ok",
-                type: "primary"
-            },
-            {
-                label: "Cancel",
-                type: "secondary"
-            }
-        ]
-    });
-    const emitDanger = () => $vuert.emit({
-        icon: "circle-xmark",
-        title: "Danger",
-        message: "This is a danger message.",
-        type: "error",
-        dismissible: true,
-        timeout: 5000,
-        actions: [
-            {
-                label: "Ok",
-                type: "primary"
-            },
-            {
-                label: "Cancel",
-                type: "secondary"
-            }
-        ]
-    });
 </script>
 
 <template>
@@ -85,21 +7,7 @@
         <header>
             <VueLogo />
         </header>
-        <h1>Your Tuemplate is up and running! 🚀</h1>
-        <div>
-            <AppButton theme="success" @click="emitSuccess">
-                Success
-            </AppButton>
-            <AppButton theme="info" @click="emitInfo">
-                Informative
-            </AppButton>
-            <AppButton theme="warning" @click="emitWarning">
-                Warning
-            </AppButton>
-            <AppButton theme="danger" @click="emitDanger">
-                Danger
-            </AppButton>
-        </div>
+        <h1>Your Backoffice App is up and running! 🚀</h1>
     </div>
 </template>
 
@@ -112,10 +20,5 @@
         justify-content: center;
         min-height: calc(100dvh - var(--navigation-bar-height));
         text-align: center;
-
-        .btn
-        {
-            margin: 0.5em;
-        }
     }
 </style>

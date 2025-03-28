@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
 
 const router = createRouter({
-    history: createWebHistory("/tuemplate/"),
+    history: createWebHistory(),
     routes: [
         {
             path: "/",
@@ -11,9 +11,14 @@ const router = createRouter({
             component: HomePage
         },
         {
-            path: "/about",
-            name: "about",
-            component: () => import("@/pages/AboutPage.vue")
+            path: "/orders",
+            name: "orders",
+            component: () => import("@/pages/OrdersPage.vue")
+        },
+        {
+            path: "/products",
+            name: "products",
+            component: () => import("@/pages/ProductsPage.vue")
         }
     ]
 });
