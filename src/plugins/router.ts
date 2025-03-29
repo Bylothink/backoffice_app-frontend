@@ -11,14 +11,25 @@ const router = createRouter({
             component: HomePage
         },
         {
-            path: "/orders",
+            path: "/orders/",
             name: "orders",
             component: () => import("@/pages/OrdersPage.vue")
         },
         {
-            path: "/products",
+            path: "/products/",
             name: "products",
-            component: () => import("@/pages/ProductsPage.vue")
+            component: () => import("@/pages/products/ListPage.vue")
+        },
+        {
+            path: "/product/create/",
+            name: "product-create",
+            component: () => import("@/pages/products/CreatePage.vue")
+        },
+        {
+            path: "/product/:id/",
+            name: "product-edit",
+            component: () => import("@/pages/products/EditPage.vue"),
+            props: true
         }
     ]
 });

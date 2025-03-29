@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@byloth/core':
+        specifier: ^2.0.1
+        version: 2.0.1
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -82,6 +85,9 @@ packages:
   '@babel/types@7.27.0':
     resolution: {integrity: sha512-H45s8fVLYjbhFH62dIJ3WtmJ6RSPt/3DRO0ZcT2SUiYiQyz3BLVb9ADEnLl91m74aQPS3AzzeajZHYOalWe3bg==}
     engines: {node: '>=6.9.0'}
+
+  '@byloth/core@2.0.1':
+    resolution: {integrity: sha512-SXrGeuZs37e0crTrCu+mlJk9pvgAKJHq/zPyGOaPTC8kReDj9kAkfl7/7QCU70pnbo0e1ZIrXl3Lt+hfGNNqLA==}
 
   '@byloth/eslint-config-nuxt@3.1.0':
     resolution: {integrity: sha512-9Kg/H2cL9qKEV6dRw7E6v8DjxSQH/WiOWKr7MNDxrVbpcjlpHaGOjNA2LhWaOqeVBk/Z22ujRps4VK8HKGFVdA==}
@@ -1484,6 +1490,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
+
+  '@byloth/core@2.0.1': {}
 
   '@byloth/eslint-config-nuxt@3.1.0(eslint@9.23.0)(typescript@5.8.2)':
     dependencies:
