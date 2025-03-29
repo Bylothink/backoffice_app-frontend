@@ -24,10 +24,10 @@
                 <VListItem prepend-icon="mdi-home"
                            title="Home"
                            :to="{ name: 'home' }" />
-                <VListItem prepend-icon="mdi-page-previous"
+                <VListItem prepend-icon="mdi-file-document-arrow-right-outline"
                            title="Orders"
                            :to="{ name: 'orders' }" />
-                <VListItem prepend-icon="mdi-package-variant"
+                <VListItem prepend-icon="mdi-package-variant-closed"
                            title="Products"
                            :to="{ name: 'products' }" />
             </VList>

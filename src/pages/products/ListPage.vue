@@ -4,7 +4,7 @@
     import { ref } from "vue";
     import { useRouter } from "vue-router";
 
-    import useProductStore from "@/stores/products";
+    import useProductsStore from "@/stores/products";
 
     import type { Product } from "@/models";
     import type { DataTableHeader } from "@/types";
@@ -34,7 +34,10 @@
         }
     ];
 
-    const $products = useProductStore();
+    const $router = useRouter();
+    const $products = useProductsStore();
+
+    const query = ref("");
     const products = ref<Product[]>([]);
 
     const isLoading = ref(false);
@@ -56,9 +59,6 @@
         }
     };
 
-    const query = ref("");
-
-    const $router = useRouter();
     const createNewProduct = () =>
     {
         $router.push({ name: "product-create" });
@@ -87,7 +87,7 @@
     {
         try
         {
-            $products.remove(productToDelete.value!.id);
+            await $products.remove(productToDelete.value!.id);
         }
         catch (error)
         {
@@ -106,7 +106,7 @@
 
 <template>
     <VContainer>
-        <VSheet border rounded>
+        <VCard border flat>
             <VDataTable :headers="HEADERS"
                         :hide-default-footer="products.length < 11"
                         :items="products"
@@ -117,7 +117,7 @@
                         <VCol>
                             <VToolbarTitle>
                                 <VIcon color="medium-emphasis"
-                                       icon="mdi-package-variant"
+                                       icon="mdi-package-variant-closed"
                                        start />
                                 Products
                             </VToolbarTitle>
@@ -125,7 +125,6 @@
                         <VCol cols="6">
                             <VTextField v-model="query"
                                         density="compact"
-                                        flat
                                         hide-details
                                         label="Search"
                                         prepend-inner-icon="mdi-magnify"
@@ -144,21 +143,17 @@
                 <template #item.actions="{ item }">
                     <div class="d-flex ga-2 justify-end">
                         <VBtn color="primary"
-                              icon
+                              icon="mdi-pencil"
                               size="x-small"
-                              @click="editProduct(item.id)">
-                            <VIcon icon="mdi-pencil" />
-                        </VBtn>
+                              @click="editProduct(item.id)" />
                         <VBtn color="error"
-                              icon
+                              icon="mdi-delete"
                               size="x-small"
-                              @click="askDeleteConfirmation(item)">
-                            <VIcon icon="mdi-delete" />
-                        </VBtn>
+                              @click="askDeleteConfirmation(item)" />
                     </div>
                 </template>
             </VDataTable>
-        </VSheet>
+        </VCard>
         <VDialog v-model="deleteAlert"
                  max-width="400"
                  persistent>
@@ -171,14 +166,14 @@
                     </VCardText>
                 </template>
                 <template #actions>
-                    <VSpacer />
-                    <VBtn @click="closeDialog">
-                        Cancel
-                    </VBtn>
                     <VBtn color="error"
                           variant="flat"
                           @click="confirmDelete">
                         Delete
+                    </VBtn>
+                    <VSpacer />
+                    <VBtn @click="closeDialog">
+                        Cancel
                     </VBtn>
                 </template>
             </VCard>
