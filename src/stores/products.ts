@@ -9,13 +9,15 @@ export type ProductData = Omit<Product, "id">;
 
 export default defineStore("products", () =>
 {
-    async function create(product: ProductData): Promise<void>
+    async function create(product: ProductData): Promise<Product>
     {
         const response = await axios.post<Product>(`${BACKEND_URL}/api/products/`, product);
         if (response.status !== 201)
         {
             throw new Error("An error occurred while creating the new product.");
         }
+
+        return response.data;
     }
     async function update(id: number, product: ProductData): Promise<Product>
     {

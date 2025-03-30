@@ -13,7 +13,18 @@ const router = createRouter({
         {
             path: "/orders/",
             name: "orders",
-            component: () => import("@/pages/OrdersPage.vue")
+            component: () => import("@/pages/orders/ListPage.vue")
+        },
+        {
+            path: "/order/create/",
+            name: "order-create",
+            component: () => import("@/pages/orders/CreatePage.vue")
+        },
+        {
+            path: "/order/:id/",
+            name: "order-edit",
+            component: () => import("@/pages/orders/EditPage.vue"),
+            props: (route) => ({ id: Number(route.params.id) })
         },
         {
             path: "/products/",

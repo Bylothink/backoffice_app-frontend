@@ -3,7 +3,7 @@
     import { useRouter } from "vue-router";
     import { VNumberInput } from "vuetify/labs/components";
 
-    import useProductsStore from "@/stores/products";
+    import { useProductsStore } from "@/stores";
 
     const $products = useProductsStore();
 
@@ -30,6 +30,8 @@
         }
         catch (error)
         {
+            // TODO: Use `@byloth/vuert` to show an error alert.
+
             // eslint-disable-next-line no-console
             console.error("Error fetching product:", error);
         }
@@ -44,15 +46,17 @@
         try
         {
             isLoading.value = true;
-            const result = await $products.update(props.id, {
+            const product = await $products.update(props.id, {
                 name: name.value,
                 price: price.value
             });
 
+            // TODO: Use `@byloth/vuert` to show a success snackbar.
+
             if (keepEditing)
             {
-                name.value = result.name;
-                price.value = result.price;
+                name.value = product.name;
+                price.value = product.price;
             }
             else
             {
@@ -61,6 +65,8 @@
         }
         catch (error)
         {
+            // TODO: Use `@byloth/vuert` to show an error alert.
+
             // eslint-disable-next-line no-console
             console.error("Error creating product:", error);
         }

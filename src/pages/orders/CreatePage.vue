@@ -1,42 +1,32 @@
 <script setup lang="ts">
     import { ref } from "vue";
     import { useRouter } from "vue-router";
-    import { VNumberInput } from "vuetify/labs/components";
 
-    import { useProductsStore } from "@/stores";
+    import { useOrdersStore } from "@/stores";
 
-    const $products = useProductsStore();
+    const $orders = useOrdersStore();
 
     const name = ref("");
-    const price = ref(0);
+    const description = ref("");
 
-    const onSubmit = async (createAnother: boolean) =>
+    const onSubmit = async () =>
     {
         try
         {
-            await $products.create({
+            const order = await $orders.create({
                 name: name.value,
-                price: price.value
+                description: description.value
             });
 
             // TODO: Use `@byloth/vuert` to show a success snackbar.
-
-            if (createAnother)
-            {
-                name.value = "";
-                price.value = 0;
-            }
-            else
-            {
-                $router.push({ name: "products" });
-            }
+            $router.replace({ name: "order-edit", params: { id: order.id } });
         }
         catch (error)
         {
             // TODO: Use `@byloth/vuert` to show an error alert.
 
             // eslint-disable-next-line no-console
-            console.error("Error creating product:", error);
+            console.error("Error creating order:", error);
         }
     };
 
@@ -49,32 +39,29 @@
 
 <template>
     <VContainer>
-        <form @submit.prevent="onSubmit(false)">
+        <form @submit.prevent="onSubmit">
             <VCard border flat>
                 <VToolbar>
                     <VToolbarTitle>
                         <VIcon color="medium-emphasis"
-                               icon="mdi-package-variant-plus"
+                               icon="mdi-file-document-plus-outline"
                                start />
-                        Create a new Product
+                        Create a new Order
                     </VToolbarTitle>
                 </VToolbar>
                 <VCardText>
                     <VRow>
                         <VCol cols="12">
                             <VTextField v-model="name"
-                                        label="Product Name"
-                                        placeholder="Enter product name"
+                                        label="Order Name"
+                                        placeholder="Enter order name"
                                         required />
                         </VCol>
                         <VCol cols="12">
-                            <VNumberInput v-model="price"
-                                          label="Product Price"
-                                          :min="0"
-                                          placeholder="Enter product price"
-                                          :precision="2"
-                                          required
-                                          :step="5" />
+                            <VTextarea v-model="description"
+                                       label="Order Description"
+                                       placeholder="Enter order description"
+                                       required />
                         </VCol>
                     </VRow>
                 </VCardText>
@@ -84,14 +71,9 @@
                     </VBtn>
                     <VSpacer />
                     <VBtn color="primary"
-                          variant="outlined"
-                          @click="onSubmit(true)">
-                        Save & Add Another
-                    </VBtn>
-                    <VBtn color="primary"
                           variant="flat"
                           type="submit">
-                        Save & Go Back
+                        Save & Continue
                     </VBtn>
                 </VCardActions>
             </VCard>

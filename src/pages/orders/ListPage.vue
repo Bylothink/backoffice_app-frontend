@@ -4,9 +4,9 @@
     import { ref } from "vue";
     import { useRouter } from "vue-router";
 
-    import { useProductsStore } from "@/stores";
+    import { useOrdersStore } from "@/stores";
 
-    import type { Product } from "@/models";
+    import type { Order } from "@/models";
     import type { DataTableHeader } from "@/types";
 
     const HEADERS: DataTableHeader = [
@@ -22,8 +22,13 @@
             sortable: true
         },
         {
-            title: "Price",
-            value: "price",
+            title: "Description",
+            value: "description",
+            sortable: true
+        },
+        {
+            title: "Total",
+            value: "total",
             align: "end",
             sortable: true
         },
@@ -35,25 +40,25 @@
     ];
 
     const $router = useRouter();
-    const $products = useProductsStore();
+    const $orders = useOrdersStore();
 
     const query = ref("");
-    const products = ref<Product[]>([]);
+    const orders = ref<Order[]>([]);
 
     const isLoading = ref(false);
-    const reloadProducts = async () =>
+    const reloadOrders = async () =>
     {
         try
         {
             isLoading.value = true;
-            products.value = await $products.getList(0, 100);
+            orders.value = await $orders.getList(0, 100);
         }
         catch (error)
         {
             // TODO: Use `@byloth/vuert` to show an error alert.
 
             // eslint-disable-next-line no-console
-            console.error("Error fetching products:", error);
+            console.error("Error fetching orders:", error);
         }
         finally
         {
@@ -61,20 +66,20 @@
         }
     };
 
-    const createNewProduct = () =>
+    const createNewOrder = () =>
     {
-        $router.push({ name: "product-create" });
+        $router.push({ name: "order-create" });
     };
-    const editProduct = (id: number) =>
+    const editOrder = (id: number) =>
     {
-        $router.push({ name: "product-edit", params: { id } });
+        $router.push({ name: "order-edit", params: { id } });
     };
 
     const deleteAlert = ref(false);
-    const productToDelete = ref<Product | null>(null);
-    const askDeleteConfirmation = (product: Product) =>
+    const orderToDelete = ref<Order | null>(null);
+    const askDeleteConfirmation = (order: Order) =>
     {
-        productToDelete.value = product;
+        orderToDelete.value = order;
         deleteAlert.value = true;
     };
 
@@ -83,13 +88,13 @@
         deleteAlert.value = false;
 
         await delay(280);
-        productToDelete.value = null;
+        orderToDelete.value = null;
     };
     const confirmDelete = async () =>
     {
         try
         {
-            await $products.remove(productToDelete.value!.id);
+            await $orders.remove(orderToDelete.value!.id);
 
             // TODO: Use `@byloth/vuert` to show a success snackbar.
         }
@@ -98,24 +103,24 @@
             // TODO: Use `@byloth/vuert` to show an error alert.
 
             // eslint-disable-next-line no-console
-            console.error("Error deleting product:", error);
+            console.error("Error deleting order:", error);
         }
         finally
         {
             closeDialog();
-            reloadProducts();
+            reloadOrders();
         }
     };
 
-    reloadProducts();
+    reloadOrders();
 </script>
 
 <template>
     <VContainer>
         <VCard border flat>
             <VDataTable :headers="HEADERS"
-                        :hide-default-footer="products.length < 11"
-                        :items="products"
+                        :hide-default-footer="orders.length < 11"
+                        :items="orders"
                         :loading="isLoading"
                         :search="query">
                 <template #top>
@@ -124,9 +129,9 @@
                             <VToolbarTitle>
                                 <VIcon class="ms-2"
                                        color="medium-emphasis"
-                                       icon="mdi-package-variant-closed"
+                                       icon="mdi-file-document-arrow-right-outline"
                                        start />
-                                Products
+                                Orders
                             </VToolbarTitle>
                         </VCol>
                         <VCol cols="6">
@@ -142,8 +147,8 @@
                             <VBtn border
                                   class="me-3"
                                   prepend-icon="mdi-plus"
-                                  text="New Product"
-                                  @click="createNewProduct" />
+                                  text="New Order"
+                                  @click="createNewOrder" />
                         </VCol>
                     </VToolbar>
                 </template>
@@ -152,7 +157,7 @@
                         <VBtn color="primary"
                               icon="mdi-pencil"
                               size="x-small"
-                              @click="editProduct(item.id)" />
+                              @click="editOrder(item.id)" />
                         <VBtn color="error"
                               icon="mdi-delete"
                               size="x-small"
@@ -166,11 +171,11 @@
         <VDialog v-model="deleteAlert"
                  max-width="400"
                  persistent>
-            <VCard prepend-icon="mdi-delete-alert" title="Delete Product?">
+            <VCard prepend-icon="mdi-delete-alert" title="Delete Order?">
                 <template #default>
                     <VCardText>
                         Are you sure you want to delete
-                        "<strong>[#{{ productToDelete!.id }}] {{ productToDelete!.name }}</strong>"?<br />
+                        "<strong>[#{{ orderToDelete!.id }}] {{ orderToDelete!.name }}</strong>"?<br />
                         It will be lost <strong>forever</strong> (it's a very long time)!
                     </VCardText>
                 </template>

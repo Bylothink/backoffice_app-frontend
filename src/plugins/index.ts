@@ -10,6 +10,11 @@ const plugins: Plugin = {
         app.use(pinia);
         app.use(router);
         app.use(vuetify);
+
+        // TODO: Adds `@byloth/vuert` plugin + a global error handler.
+        //
+        // app.use(vuert);
+        // app.use(errorHandler);
     }
 };
 
