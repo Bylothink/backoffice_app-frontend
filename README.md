@@ -4,36 +4,44 @@
 
 A generic frontend for a backoffice app to manage some orders and products.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Get started
 
 ```sh
-pnpm install
+cp .env.example .env
 ```
 
-### Compile and Hot-Reload for Development
+> [!TIP]
+>
+> Edit both `.env` and `docker-compose.yml` environment variables to match your needs.
+
+### Using Docker
+
+#### Build
 
 ```sh
-pnpm run dev
+docker compose build
 ```
 
-### Type-Check, Compile and Minify for Production
+#### Run
 
 ```sh
-pnpm run build
+docker compose up
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Using Node.js or Bun
+
+#### First run
 
 ```sh
-pnpm run lint
+npm install
 ```
 
-### Run Unit Tests & Watch for Changes
+#### Run
 
 ```sh
-pnpm run test
+npm run dev
 ```
+
+> [!INFO]
+>
+> The application will be available at [`http://localhost:5173`](http://localhost:5173) by default.

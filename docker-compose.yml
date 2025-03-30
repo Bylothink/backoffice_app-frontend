@@ -1,0 +1,14 @@
+name: backoffice_frontend
+services:
+  nginx:
+    build:
+      context: .
+      args:
+        - VITE_BACKEND_URL=http://localhost:8000
+
+    image: bylothink/backoffice-frontend:latest
+    env_file:
+      - .env
+
+    ports:
+      - 5173:80
