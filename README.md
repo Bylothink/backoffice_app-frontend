@@ -25,7 +25,7 @@ docker compose build
 #### Run
 
 ```sh
-docker compose up
+docker compose up [-d]
 ```
 
 ### Using Node.js or Bun
@@ -42,6 +42,6 @@ npm install
 npm run dev
 ```
 
-> [!INFO]
+> [!NOTE]
 >
 > The application will be available at [`http://localhost:5173`](http://localhost:5173) by default.
